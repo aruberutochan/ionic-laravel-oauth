@@ -1,0 +1,63 @@
+<!--
+  Generated template for the LoginPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>login</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+
+<ion-content padding>
+
+  <div class="logo">
+    <ion-icon name="contact" color="primary"></ion-icon>
+
+  </div>
+
+  <form #loginForm="ngForm" novalidate>
+    <ion-list no-lines>
+      <ion-item>
+        <ion-label floating color="primary">Username</ion-label>
+        <ion-input [(ngModel)]="login.username" name="username" type="text" #username="ngModel" spellcheck="false" autocapitalize="off"
+          required>
+        </ion-input>
+      </ion-item>
+      <p ion-text [hidden]="username.valid || submitted == false" color="danger" padding-left>
+        Username is required
+      </p>
+
+      <ion-item>
+        <ion-label floating color="primary">Password</ion-label>
+        <ion-input [(ngModel)]="login.password" name="password" type="password" #password="ngModel" required>
+        </ion-input>
+      </ion-item>
+      <p ion-text [hidden]="password.valid || submitted == false" color="danger" padding-left>
+        Password is required
+      </p>
+
+      <p text-right>
+        <a href="">Forgot password?</a>
+      </p>
+
+    </ion-list>
+
+    <ion-row responsive-sm>
+      <button ion-button full color="secondary" (click)="onLogin(loginForm)" type="submit" block>Login</button>
+
+    </ion-row>
+
+  </form>
+  <ion-row>
+    <p>If you don't have an accout</p>
+    <button ion-button (click)="onSingUpNow()" block>SignUp</button>
+  </ion-row>
+
+</ion-content>
+
