@@ -33,17 +33,21 @@ interface RegisterUserForm {
 
 @Injectable()
 export class OAuthServiceProvider {
-
-  tokenUrl: string = 'http://YOURDOMAIN.COM/oauth/token';
+  // CONFIGURATION PARAMS
+  baseDomain: string = 'http://YOURDOMAIN.COM/';
   clientSecret: string = 'YOUROAUTHCLIENTSECRET';
   clientId: number = 0; // Change for your oauth client ID
-  baseApiUrl: string = 'http://YOURDOMAIN.COM/api';
+
+  // Other params
+  tokenUrl: string = this.baseDomain + 'oauth/token';
+  baseApiUrl: string = this.baseDomain + 'api';
+  registerUrl: string = this.baseApiUrl + '/user/register';
   validateTokenUrl: string = '';
   accessToken: string = '';
   refreshToken: string = '';
   OAuthOptions : any = {};
   loggedIn: boolean = false;
-  registerUrl: string = '/user/register';
+
 
 
   constructor(
@@ -94,7 +98,7 @@ export class OAuthServiceProvider {
       password_confirmation: user.password
 
     }
-    return this.http.post(this.baseApiUrl + this.registerUrl, body).subscribe(
+    return this.http.post(this.registerUrl, body).subscribe(
       (res: TokenResponse) => {
         //console.log(res.access_token);
         this.loginWithTokens(res.access_token, res.refresh_token);
